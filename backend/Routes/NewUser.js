@@ -4,7 +4,7 @@ const User =require('../models/User')
 const { body, validationResult } = require('express-validator');
 const bcrypt =require("bcryptjs");
 const jwt =require("jsonwebtoken");
-
+const jwtSecret = "TheDeveloperOfThisProjectIsVIKASH$"
 router.post("/createuser",
 body('email','incorrect mail id').isEmail(),
 body('name','enter a valid name').isLength({ min: 5 }),
@@ -52,11 +52,20 @@ async (req,res)=>{
         if(!userData){
             return res.status(400).json({ errors: " User not found " });
         }
-        const pwCompare=await bcrypt.compare(userData.password,req.body.password)
+
+        const pwCompare=await bcrypt.compare(req.body.password,userData.password)
+
         if(!pwCompare){
-            return res.status(400).json({ errors: " Incorrect password " });
+            return res.status(400).json({ errors: " Incorrect password or somehthing" });
         }
-        return res.json({ success:true });
+
+        const data={
+            user: {
+                id:userData.id
+            }
+        }
+        const authtoken =jwt.sign(data,jwtSecret)
+        return res.json({ success:true,authtoken:authtoken });
 
     }catch(error){
         console.log(error)
