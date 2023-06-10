@@ -1,18 +1,20 @@
 import React from 'react'
 
-export default function Foodcard() {
+export default function Foodcard(props) {
+    let options= props.options;
+    let priceOpt =Object.keys(options);
     return (
         <div>
             <div className="card mt-3" style={{ width: "18rem", "maxHeight": "360px" }}>
                 <img
                     className="card-img-top"
-                    src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                    src={props.imgSrc}
                     alt="Card cap"
                 />
                 <div className="card-body">
-                    <h5 className="card-title">Card title</h5>
+                    <h5 className="card-title">{props.foodName}</h5>
                     <p className="card-text">
-                        This is about this card.
+                        {/* {props.des} */}
                     </p>
                     <div className="container w-100"> Qty
                         <select className="m-2 h-100  bg-success">
@@ -25,8 +27,13 @@ export default function Foodcard() {
                             }
                         </select> Size
                         <select className="m-2 h-100  bg-success">
-                            <option value="half">Half</option>
-                            <option value="full">Full</option>
+                            {
+                                priceOpt.map((typData)=>{
+                                    return(
+                                        <option key={typData} value={typData}>{typData}</option>
+                                    )
+                                })
+                            }
                         </select>
                         <div className='d-inline h-100 fs-5'> Price </div>
                     </div>
@@ -35,3 +42,6 @@ export default function Foodcard() {
         </div>
     )
 }
+
+
+// Time stamp 18.29 #9

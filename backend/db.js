@@ -8,14 +8,19 @@ const mongoDB = async () => {
     await mongoose.connect(mongoURI, { useNewUrlParser: true });
     console.log("Connected");
 
-    const foodItemsCollection = await mongoose.connection.db.collection("Food_item");
+    const foodItemsCollection = mongoose.connection.db.collection("Food_item");
+    const data = await foodItemsCollection.find({}).toArray();
 
-    const foodItems = await foodItemsCollection.find({}).toArray();
+    global.foodItems = data;
 
-    // console.log("Food Items:", foodItems);
+    const foodCategory = mongoose.connection.db.collection("food_types");
+    const catData = await foodCategory.find({}).toArray();
 
-  } catch (err) {
-    console.log(err);
+    global.foodCategory = catData;
+
+     
+  } catch (error) {
+    console.log(error);
   }
 };
 
