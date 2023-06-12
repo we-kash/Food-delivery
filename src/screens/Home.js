@@ -74,15 +74,15 @@ export default function Home() {
                   <hr></hr>
                   {foodItem!==[]
                   ?
-                  foodItem.filter((item)=> (item.CategoryName === data.CategoryName) &&  (item.name.toLowerCase().includes(search))     )           
+                  foodItem.filter((item)=> 
+                  (item.CategoryName === data.CategoryName) && (item.name.toLowerCase().includes(search)) )           
                   .map(filtereditems=>{
                     return(
-                      <div key={filtereditems.__id} className="col-12 col-md-6 col-lg-3">
+                      <div key={filtereditems._id} className="col-12 col-md-6 col-lg-3">
                           <Foodcard 
-                            foodName={filtereditems.name }
+                            foodItem ={filtereditems}
                             options={filtereditems.options[0]}
-                            imgSrc={filtereditems.img}
-                            des={filtereditems.description}
+                            
                             ></Foodcard>
                       </div>
                     )
