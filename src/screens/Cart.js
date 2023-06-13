@@ -4,22 +4,18 @@ import { useCart, useDispatchCart } from '../components/ContextReducer';
 export default function Cart() {
   let data = useCart();
   let dispatch = useDispatchCart();
-//   if (data.length === 0) {
-//     return (
-//       <div>
-//         <div className='m-5 w-100 text-center fs-3'>The Cart is Empty!</div>
-//       </div>
-//     )
-//   }
-//   // const handleRemove = (index)=>{
-//   //   console.log(index)
-//   //   dispatch({type:"REMOVE",index:index})
-//   // }
+  if (data.length === 0) {
+    return (
+      <div>
+        <div className='m-5 w-100 text-center fs-3'>The Cart is Empty!</div>
+      </div>
+    )
+  }
 
   const handleCheckOut = async () => {
     let userEmail = localStorage.getItem("userEmail");
     // console.log(data,localStorage.getItem("userEmail"),new Date())
-    let response = await fetch("http://localhost:5000/api/auth/orderData", {
+    let response = await fetch("http://localhost:5000/api/orderData", {
       // credentials: 'include',
       // Origin:"http://localhost:3000/login",
       method: 'POST',

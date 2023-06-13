@@ -15,6 +15,7 @@ mongoDB();
 app.use(express.json());
 app.use('/api',require("./Routes/NewUser"));
 app.use('/api',require("./Routes/DisplayData"));
+app.use('/api',require("./Routes/OrderData"));
 app.get('/',(req,res)=>{
     res.send("Hello doodle")
 })
