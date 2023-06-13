@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Navbar from '../components/Navbar'
 import { Link,useNavigate } from 'react-router-dom';
 
 
@@ -31,8 +30,6 @@ export default function Login() {
   }
   return (
     <div>
-      <Navbar />
-
       <>
         <div className='container m-5'>
           <form onSubmit={handleSubmit}>

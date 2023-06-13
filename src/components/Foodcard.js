@@ -14,10 +14,30 @@ export default function Foodcard(props) {
 
 
     const handleAddtoCart = async () => {
+        let food=[]
+        for(const item of data)
+        {
+            if(item.id === props.foodItem._id){
+                food = item;
+                break;
+            }
+        }
+        if (food !== []) {
+            if (food.size === size) {
+              await dispatch({ type: "UPDATE", id: props.foodItem._id, price: finalPrice, qty: qty })
+              return
+            }
+            else if (food.size !== size) {
+              await dispatch({ type: "ADD", id: props.foodItem._id, name: props.foodItem.name, price: finalPrice, qty: qty, size: size,img: props.ImgSrc })
+              return
+            }
+            return
+          }
+      
         await dispatch({
             type: "ADD", id: props.foodItem._id, name: props.foodItem.name,
             price: finalPrice, qty: qty, size: size })
-        console.log(data)
+        // console.log(data)
     }
     let finalPrice=qty * parseInt(options[size]);
     useEffect(()=>{
@@ -73,6 +93,3 @@ export default function Foodcard(props) {
         </div>
     )
 }
-
-
-// Time stamp 18.29 #9

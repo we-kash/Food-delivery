@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
 
 
 
 export default function SignUp() {
     const [credentials, setcredentials] = useState({ name: "", password: "", geolocation: "", email: "" })
+    let navigate = useNavigate()
     const handleSubmit = async (e) => {
         e.preventDefault();
         const response = await fetch("http://localhost:5000/api/createuser", {
@@ -16,7 +18,14 @@ export default function SignUp() {
         });
         const json = await response.json()
         console.log(json);
-        if (!json.success) {
+
+        if (json.success) {
+            //save the auth toke to local storage and redirect
+            localStorage.setItem('token', json.authToken)
+            navigate("/login")
+      
+          }
+        else if (!json.success) {
             alert("Enter valid credentials")
         }
     }
