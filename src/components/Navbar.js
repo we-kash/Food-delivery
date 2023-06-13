@@ -44,7 +44,7 @@ export default function Navbar() {
 
               {(localStorage.getItem("authToken")) ?
                 <li className="nav-item">
-                  <Link className="nav-link active fs-4 m-1" aria-current="page" to="/">
+                  <Link className="nav-link active fs-4 m-1" aria-current="page" to="/myOrder">
                     My Order
                   </Link>
                 </li>
